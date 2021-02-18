@@ -12,10 +12,11 @@ keep_difficult = True  # difficult ground truth objects must always be considere
 batch_size = 64
 workers = 4
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# device = torch.device("cpu")
 checkpoint = './checkpoint_ssd300.pth.tar'
 
 # Load model checkpoint that is to be evaluated
-checkpoint = torch.load(checkpoint)
+checkpoint = torch.load(checkpoint, map_location=device)
 model = checkpoint['model']
 model = model.to(device)
 
